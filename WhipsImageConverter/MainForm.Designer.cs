@@ -75,10 +75,14 @@
             this.linkLabel_GitHub = new System.Windows.Forms.LinkLabel();
             this.backgroundWorkerInvert = new System.ComponentModel.BackgroundWorker();
             this.label12 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ImagePreviewBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_background_color)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // ImagePreviewBox
@@ -516,7 +520,7 @@
             this.button_background_color.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button_background_color.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_background_color.ForeColor = System.Drawing.Color.White;
-            this.button_background_color.Location = new System.Drawing.Point(678, 260);
+            this.button_background_color.Location = new System.Drawing.Point(679, 239);
             this.button_background_color.Margin = new System.Windows.Forms.Padding(2);
             this.button_background_color.Name = "button_background_color";
             this.button_background_color.Size = new System.Drawing.Size(152, 25);
@@ -531,7 +535,7 @@
             this.pictureBox_background_color.BackColor = System.Drawing.Color.Black;
             this.pictureBox_background_color.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox_background_color.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox_background_color.Location = new System.Drawing.Point(649, 260);
+            this.pictureBox_background_color.Location = new System.Drawing.Point(651, 239);
             this.pictureBox_background_color.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox_background_color.Name = "pictureBox_background_color";
             this.pictureBox_background_color.Size = new System.Drawing.Size(24, 25);
@@ -716,12 +720,53 @@
             this.label12.TabIndex = 45;
             this.label12.Text = "Surface Name:";
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(800, 277);
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(30, 20);
+            this.numericUpDown1.TabIndex = 47;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(648, 277);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(41, 13);
+            this.label13.TabIndex = 48;
+            this.label13.Text = "Frames";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(625, 436);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 49;
+            this.button1.Text = "Make Movie";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.ClientSize = new System.Drawing.Size(849, 503);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.comboBoxSurface);
@@ -773,6 +818,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_background_color)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -824,6 +870,9 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox comboBoxSurface;
         private System.Windows.Forms.Button btnLoad;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -83,7 +83,10 @@ namespace WhipsImageConverter
         readonly List<string> surfaceNames = new List<string>();
 
         Vector2 screenSizeChars;
-        
+
+        FrameDimension dimension;
+        int frame_count;
+
         const string INSTRUCTIONS = @"1) Browse for your desired image file.
 2) Select block type and surface name.
 3) Select dithering option.
@@ -98,7 +101,7 @@ namespace WhipsImageConverter
             InitializeComponent();
             comboBoxDither.SelectedIndex = 0;
             comboBoxBlock.SelectedIndex = 0;
-            openFileDialog1.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png, *.bmp) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png; *.bmp";
+            openFileDialog1.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png, *.bmp, *.gif) | *.gif; *.jpg; *.jpeg; *.jpe; *.jfif; *.png; *.bmp";
             CheckBackgroundColorEnabled();
 
             // Set form name
@@ -262,7 +265,7 @@ namespace WhipsImageConverter
                 }
 
                 //Check if valid file type
-                if (!(fileDirectory.ToLower().EndsWith(".png") || fileDirectory.ToLower().EndsWith(".jpg") || fileDirectory.EndsWith(".jpeg") || fileDirectory.EndsWith(".bmp")))
+                if (!(fileDirectory.ToLower().EndsWith(".png") || fileDirectory.ToLower().EndsWith(".jpg") || fileDirectory.EndsWith(".jpeg") || fileDirectory.EndsWith(".bmp") || fileDirectory.EndsWith(".gif")))
                 {
                     MessageBox.Show("Error: File must be a png or jpg or bmp image!");
                     return false;
@@ -271,6 +274,10 @@ namespace WhipsImageConverter
                 // Does not keep a file handle that is disposed at an indeterminate time
                 baseImage = (Bitmap)Image.FromStream(new MemoryStream(File.ReadAllBytes(fileDirectory)));
             }
+            dimension = new FrameDimension(baseImage.FrameDimensionsList[0]);
+            frame_count = baseImage.GetFrameCount(dimension);
+            numericUpDown1.Maximum = frame_count;
+            label13.Text = "Frames count: " + frame_count;
 
             if (comboBoxBlock.SelectedIndex == blockNames.Count - 1)
             {
@@ -1176,6 +1183,35 @@ namespace WhipsImageConverter
         }
 
 
+
         #endregion
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            if (baseImage == null)
+                return;
+            baseImage.SelectActiveFrame(dimension, (int)numericUpDown1.Value -1);
+            BuildBitmaps();
+            DitherImage();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (baseImage == null)
+                return;
+            string fulltext = "";
+            for(int i = 1; i <= frame_count; i++)
+            {
+                baseImage.SelectActiveFrame(dimension, i - 1);
+                BuildBitmaps();
+                DitherImage();
+                ConvertImage();
+
+                fulltext += textBox_Return.Text + 'Ї';
+            }
+
+            var popup = new ResultForm(fulltext);
+            popup.ShowDialog();
+        }
     }
 }
